@@ -4,7 +4,7 @@
 ---
 ---
 
-Hi! My name's **Mark** and I'm a senior computer science major here at New Paltz. 
+Hi! My name's **Mark** and I'm currently a senior computer science major at SUNY New Paltz. 
 
 ![Self-portrait](./Mark.jpg)
 
