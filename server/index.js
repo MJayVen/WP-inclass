@@ -2,12 +2,12 @@ const express = require('express')
 const app = express()
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+  res.end('Hello Railway, can you hear me?');
 })
 
 app.listen(port, hostname, () => {
