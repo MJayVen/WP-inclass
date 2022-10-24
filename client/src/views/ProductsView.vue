@@ -20,7 +20,7 @@ const results = computed(() => {
             <input class="input" type="text" v-model="search" placeholder="Search">
         </div>
         <div class="products">
-            <RouterLink class="product" v-for="product in resultsx  ``" :key="product.id" :to="`/product/${product.id}`">
+            <RouterLink class="product" v-for="product in results" :key="product.id" :to="`/product/${product.id}`">
                 <div class="product-image">
                     <img :src="product.thumbnail" :alt="product.title">
                 </div>
