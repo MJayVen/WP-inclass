@@ -28,8 +28,8 @@ let isActive = ref(false); // isActive is a reactive variable. its an object of 
                         Home
                     </RouterLink>
 
-                    <RouterLink to="/store" class="navbar-item">
-                        Store
+                    <RouterLink to="/products" class="navbar-item">
+                        Products
                     </RouterLink>
 
                     <div class="navbar-item has-dropdown is-hoverable">
