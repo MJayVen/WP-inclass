@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import Cart from './Cart.vue';
 import LoginBadge from './LoginBadge.vue';
 
-let isActive = ref(false); // isActive is a reactive variable. its an object of type ref who's value is false
+const isActive = ref(false); // isActive is a reactive variable. its an object of type ref who's value is false
+const isCartOpen = ref(false);
 </script>
 
 <template>
+    <Cart :isOpen="isCartOpen"/>
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -56,6 +59,13 @@ let isActive = ref(false); // isActive is a reactive variable. its an object of 
                 </div>
 
                 <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <button class="button is-primary" @click="isCartOpen = !isCartOpen">
+                                <strong>Cart</strong>
+                            </button>
+                        </div>
+                    </div>
                     <div class="navbar-item">
                         <LoginBadge />
                     </div>
