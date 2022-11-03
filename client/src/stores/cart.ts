@@ -25,7 +25,7 @@ export function updateProductQuantity(id: number, quantity: number) {
     if (cartItem) {
         cartItem.quantity = quantity;
         if (cartItem.quantity <= 0) {
-            cart.splice(cart.indexOf(cartItem), 1);
+            cart.splice(cart.indexOf(cartItem), 1); // remove 1 item at index of cartItem
         }
     }
 }
