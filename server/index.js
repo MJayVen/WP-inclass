@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 
 // typescript goes through this pipeline. if one app.use fails, it will goes to the next one
 
+// static site
 app.use('/', express.static('client/dist'));
 
 app.get('/', (req, res) => {
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 })
 .use('/api/v1/products', productsController)
 
+// this is 
 app.get('*', (req, res) => {
   sss.PORT();
   res.sendFile('./client/dist/index.html', {root:'./client/dist'});
