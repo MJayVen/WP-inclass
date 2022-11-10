@@ -4,7 +4,9 @@ import { computed, reactive, ref, watch } from "vue";
 import { RouterLink } from "vue-router";
 import { getProducts, type Product } from "../stores/products";
 
-const products = reactive(getProducts());
+const products = reactive([] as Product[]);
+getProducts().then( x => products.push(...x));
+
 const search = ref('');
 
 function addToCart(product: Product) {

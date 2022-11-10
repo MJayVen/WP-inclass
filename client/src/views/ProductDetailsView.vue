@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { getProduct } from "../stores/products";
+import { getProduct, type Product } from "../stores/products";
 
 const route = useRoute();
 
-const product = ref(getProduct(+route.params.id));
+const product = ref(null as Product | null);
+
+getProduct(+route.params.id).then(x => {
+    product.value = x;
+    console.log("the fetch returned!");
+});
+console.log("HELLO");
 
 </script>
 
