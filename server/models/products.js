@@ -1,7 +1,7 @@
 const data = require('../data/products.json'); // importing data
 
 function getProducts() {
-    return data.products;
+    return data;
 }
 function getProduct(id) {
     return data.products.find(product => product.id === id);
