@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import session, { login, logout } from '../stores/session';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -8,12 +9,12 @@ import session, { login, logout } from '../stores/session';
             <a class="button is-primary">
                 <strong>Sign up</strong>
             </a>
-            <a class="button is-light" @click="login('Mark', 'Venuto')">
+            <RouterLink class="button is-light" to="/login">
                 Log in
-            </a>
+            </RouterLink>
         </div>
-        <div v-else>
-            Welcome {{ session.user.firstName }} {{ session.user.lastName }} 
+        <div v-else class="navbar-item">
+            Welcome {{ session.user.name }} ({{ session.user.email }})
             <a class="button is-light" @click="logout();">
                 LOGOUT
             </a>

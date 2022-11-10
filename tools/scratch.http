@@ -1,2 +1,10 @@
 http://127.0.0.1:3000/api/v1/products/001
-# wowow send a request to the server, get response in vs code wowowow
+
+###
+
+http://127.0.0.1:3000/api/v1/cart/mp@np.edu
+###
+POST http://127.0.0.1:3000/api/v1/cart/mp@np.edu/6/1
+###
+DELETE http://127.0.0.1:3000/api/v1/cart/mp@np.edu/6
+
