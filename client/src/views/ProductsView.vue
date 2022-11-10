@@ -5,7 +5,7 @@ import { RouterLink } from "vue-router";
 import { getProducts, type Product } from "../stores/products";
 
 const products = reactive([] as Product[]);
-getProducts().then( x => products.push(...x));
+getProducts().then((x) => products.push(...x));
 
 const search = ref('');
 
