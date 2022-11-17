@@ -2,9 +2,10 @@ http://127.0.0.1:3000/api/v1/products/001
 
 ###
 
-http://127.0.0.1:3000/api/v1/cart/mp@np.edu
+POST http://127.0.0.1:3000/api/v1/cart/mp@np/6/5
 ###
-POST http://127.0.0.1:3000/api/v1/cart/mp@np.edu/6/1
-###
-DELETE http://127.0.0.1:3000/api/v1/cart/mp@np.edu/6
 
+GET http://127.0.0.1:3000/api/v1/cart/mp@np
+
+###
+PATCH http://127.0.0.1:3000/api/v1/cart/mp@np/001/1
