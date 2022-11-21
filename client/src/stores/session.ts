@@ -25,10 +25,10 @@ export async function api<T>(url: string, data: any = null, method?: string) {
     return await myFetch<T>(url, data, method);
   } catch (e) {
     setError(e as string);
-    return null;
   } finally {
     session.loading--;
   }
+  return {} as T;
 }
 
 export function login(name: string, email: string, password: string) {
