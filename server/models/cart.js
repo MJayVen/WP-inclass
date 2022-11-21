@@ -1,62 +1,56 @@
-const { getProduct } = require("./products");
-// Cart item: {id: 1, quantity: 1, productID: 1, userID: (useremail)}
+const { getProduct } = require('./products');
+// CartItem: { id: 1, quantity: 2, productId: 1, userId: 'mp@np.edu' }
 const list = [];
 
-// const add = (cartItem) => {
-//     list.push(cartItem);
-// }
+const get = (userId) => {
+    return list
+        .filter((cartItem) => cartItem.userId === userId)
+        .map((cartItem) => ({
+            ...cartItem, 
+            product: getProduct(cartItem.productId)
+        }));
+};
 
 /**
- * @param {string} userId
- * @param {number} productId
- * @param {number} quantity
- * @returns {object} cartItem
+ * 
+ * @param {string} userId 
+ * @param {number} productId 
+ * @param {number} quantity 
+ * @returns 
  */
 const add = (userId, productId, quantity) => {
-  let cartItem = list.find(
-    (cartItem) => cartItem.userID === userId && cartItem.productID === productId
-  );
-  if (cartItem) {
-    cartItem.quantity += quantity;
-  } else {
-    list.push({ id: list.length + 1, quantity: +quantity, productId, userId });
-    cartItem = { id: list.length + 1, quantity, productId, userId };
-    list.push(cartItem);
-  }
-  return { ...cartItem, product: getProduct(productId) };
+    let cartItem = list.find((cartItem) => cartItem.userId === userId && cartItem.productId === productId);
+    if (cartItem) {
+        cartItem.quantity += quantity;
+    } else {
+        cartItem = { id: list.length + 1, quantity, productId, userId };
+        list.push(cartItem);
+    }
+    return { ...cartItem, product: getProduct(productId) };
 };
 
-/**
- * @param {string} userId
- * @returns {object} cartItem
- */
-const get = (userId) => {
-  return list
-    .filter((cartItem) => cartItem.userId === userId)
-    .map((cartItem) => ({
-      ...cartItem,
-      product: getProduct(cartItem.productId),
-    }));
-};
 
 /**
- *
- * @param {string} userId
- * @param {number} productId
- * @param {number} quantity
- * @returns
+ * 
+ * @param {string} userId 
+ * @param {number} productId 
+ * @param {number} quantity 
+ * @returns 
  */
 const update = (userId, productId, quantity) => {
-  const index = list.findIndex(
-    (cartItem) => cartItem.userID === userId && cartItem.productID === productId
-  );
+    console.log(userId, productId, quantity);
+  const index = list.findIndex((cartItem) => cartItem.userId === userId && cartItem.productId === productId);
   if (index !== -1) {
-    if (quantity === 0) list.splice(index, 1);
-    else list[index].quantity = quantity;
-  } else {
-    throw new Error("Cart item not found");
+    if(quantity === 0) {
+        list.splice(index, 1);
+        return "null";
+    } else {
+        list[index].quantity = quantity;
+    }
+  }else {
+        throw new Error('Cart item not found');
   }
-  return index;
-};
+  return { ...list[index], product: getProduct(productId) };
+}
 
-module.exports = { add, get, update };
+module.exports = { add, get, update }
