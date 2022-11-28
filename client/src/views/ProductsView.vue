@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { addProductToCart } from '../stores/cart';
-import { computed, reactive, ref, watch } from "vue";
-import { RouterLink } from "vue-router";
-import { getProducts, type Product } from "../stores/products";
-import { isLoading } from '@/stores/session';
+    import { addProductToCart } from "@/stores/cart";
+    import { isLoading } from "@/stores/session";
+    import { reactive, ref, watch } from "vue";
+    import { RouterLink } from "vue-router";
+    import { getProducts, type Product } from "../stores/products";
 
-const products = reactive([] as Product[]);
-getProducts().then((x) => products.push(...x.products));
+    // const products = ref([] as Product[]);
+    // getProducts().then( x=> products.value = x);
 
-const search = ref('');
+    const products = reactive([] as Product[]);
+    getProducts().then( x=> products.push(...x.products));
+    
 
-function addToCart(product: Product) {
-    addProductToCart(product);
-}
+    const search = ref("");
 
+    function addToCart(product: Product) {
+        addProductToCart(product);
+    }
 </script>
 
 <template>
@@ -23,10 +26,10 @@ function addToCart(product: Product) {
         </div>
 
         <div class="products">
-            <RouterLink class="product" :class="{ 'is-disabled': isLoading }"
-                v-for="product in products" 
-                :key="product.id" :to="`/product/${product.id}`"
-                v-show="product.title.toLowerCase().includes(search.toLowerCase())">
+            <RouterLink v-for="product in products" :key="product.id" 
+                        class="product" :class="{ 'is-disabled': isLoading }"
+                        :to="`/product/${product.id}`"
+                        v-show="product.title.toLowerCase().includes(search.toLowerCase())">
                 <div class="product-image">
                     <img :src="product.thumbnail" :alt="product.title" />
                 </div>
@@ -34,10 +37,11 @@ function addToCart(product: Product) {
                     <b>{{ product.title }}</b>
                     <p>{{ product.description }}</p>
                     <button class="button is-small is-primary is-rounded add"
-                        :class="{ 'is-loading': isLoading }"
-                        @click.prevent="addToCart(product)">
-                            +
+                            :class="{ 'is-loading': isLoading }"
+                            @click.prevent="addToCart(product)">
+                                +
                     </button>
+                    
                     <p class="price">
                         <span class="currency">$</span>
                         <span class="amount">{{ product.price }}</span>
@@ -49,40 +53,40 @@ function addToCart(product: Product) {
 </template>
 
 <style scoped>
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: aliceblue;
-}
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: aliceblue;
+    }
 
-.add {
-    float: right;
-}
+    .add {
+        float: right;
+    }
 
-.product {
-    flex-basis: 10em;
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid #000;
-    border-radius: 5px;
-    background-color: #fff;
-}
+    .is-disabled {
+        pointer-events: none;
+        opacity: .7;
+    }
 
-.product-info {
-    font-size: small;
-}
+    .product {
+        flex-basis: 10em;
+        margin: 1em;
+        padding: 1em;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background-color: #fff;
+    }
 
-.price {
-    display: flex;
-    align-items: flex-start;
-}
+    .product-info {
+        font-size: small;
+    }
 
-.amount {
-    font-size: x-large;
-}
+    .price {
+        display: flex;
+        align-items: flex-start;
+    }
 
-.is-disabled {
-    pointer-events: none;
-    opacity: 0.5;
-}
+    .amount {
+        font-size: x-large;
+    }
 </style>

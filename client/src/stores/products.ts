@@ -1,4 +1,3 @@
-import myFetch from "@/services/myFetch";
 import { api } from "./session";
 
 export function getProducts() {

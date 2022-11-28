@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import Cart from './Cart.vue';
 import LoginBadge from './LoginBadge.vue';
+import MessageList from './MessageList.vue';
 
 const isActive = ref(false); // isActive is a reactive variable. its an object of type ref who's value is false
 const isCartOpen = ref(false);
@@ -59,6 +60,7 @@ const isCartOpen = ref(false);
                 </div>
 
                 <div class="navbar-end">
+                    <MessageList/>
                     <div class="navbar-item">
                         <div class="buttons">
                             <button class="button is-primary" @click="isCartOpen = !isCartOpen">
@@ -73,6 +75,7 @@ const isCartOpen = ref(false);
             </div>
         </div>
     </nav>
+
 </template>
 
 <style>

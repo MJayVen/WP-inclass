@@ -30,8 +30,8 @@ console.log("HELLO");
             </p>
         </div>
     </div>
-    <div v-else-if="isLoading()">
-        <img src="@/assets/placeholder-loading-demo-1.gif" style="width:100%;" alt="Loading">
+    <div v-else-if="isLoading">
+        <img src="@/assets/placeholder-loading-demo-1.gif" style="width: 100%"/>
     </div>
     <div v-else class="section">
         <h2 class="title">Product not found</h2>
