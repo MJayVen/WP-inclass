@@ -1,5 +1,6 @@
 const data = require("../data/products.json"); // importing data
 const { connect } = require("./mongo");
+const { ObjectId } = require("mongodb");
 
 const COLLECTION_NAME = "products";
 
@@ -16,7 +17,7 @@ async function getProducts() {
 
 async function getProduct(id) {
   const db = await collection();
-  const data = await db.findOne({ _id: id });
+  const data = await db.findOne({ _id: new ObjectId(id) });
   return data;
 }
 

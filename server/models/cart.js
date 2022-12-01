@@ -15,42 +15,39 @@ const get = async (userId) => {
 
 /**
  *
- * @param {string} userId
+ * @param {number} userId
  * @param {number} productId
  * @param {number} quantity
- * @returns
+ * @returns new cart
  */
-const add = (userId, productId, quantity) => {
-  let cartItem = list.find(
-    (cartItem) => cartItem.userId === userId && cartItem.productId === productId
-  );
+const add = async (userId, productId, quantity) => {
+  const db = await collection();
+  const cartItem = await db.findOne({ userId, productId });
+  // let cartItem = list.find((cartItem) => cartItem.userId === userId && cartItem.productId === productId);
   if (cartItem) {
     cartItem.quantity += quantity;
+    db.updateOne({ userId, productId }, cartItem);
   } else {
     cartItem = { id: list.length + 1, quantity, productId, userId };
-    list.push(cartItem);
+    await db.insertOne(cartItem);
+    // list.push(cartItem);
   }
   return { ...cartItem, product: getProduct(productId) };
 };
 
-/**
- *
- * @param {string} userId
- * @param {number} productId
- * @param {number} quantity
- * @returns
- */
-const update = (userId, productId, quantity) => {
-  console.log(userId, productId, quantity);
+const update = async (userId, productId, quantity) => {
+  const db = await collection();
   const index = list.findIndex(
     (cartItem) => cartItem.userId === userId && cartItem.productId === productId
   );
   if (index !== -1) {
     if (quantity === 0) {
-      list.splice(index, 1);
+      db.deleteOne({ userId, productId });
       return "null";
     } else {
-      list[index].quantity = quantity;
+      let cartItem = await db.findOne({ userId, productId });
+      cartItem.quantity = quantity;
+      db.updateOne({ userId, productId }, cartItem);
     }
   } else {
     throw new Error("Cart item not found");
