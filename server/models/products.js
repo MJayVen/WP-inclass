@@ -1,13 +1,34 @@
-const data = require('../data/products.json'); // importing data
+const data = require("../data/products.json"); // importing data
+const { connect } = require("./mongo");
 
-function getProducts() {
-    return data;
+const COLLECTION_NAME = "products";
+
+async function collection() {
+  const client = await connect();
+  return client.db("chopiphy").collection(COLLECTION_NAME);
 }
-function getProduct(id) {
-    return data.products.find(product => product.id === id);
+
+async function getProducts() {
+  const db = await collection();
+  const data = await db.find().toArray();
+  return { total: data.length, limit: data.length, products: data };
+}
+
+async function getProduct(id) {
+  const db = await collection();
+  const data = await db.findOne({ _id: id });
+  return data;
+}
+
+async function seed() {
+  const db = await collection();
+  db.insertMany(data.products);
 }
 
 module.exports = {
-    getProduct,
-    getProducts
-}
+  COLLECTION_NAME,
+  collection,
+  getProduct,
+  getProducts,
+  seed,
+};

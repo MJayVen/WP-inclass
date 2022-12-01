@@ -9,3 +9,6 @@ GET http://127.0.0.1:3000/api/v1/cart/mp@np
 
 ###
 PATCH http://127.0.0.1:3000/api/v1/cart/mp@np/001/1
+
+### fill database
+POST http://127.0.0.1:3000/api/v1/products/seed
