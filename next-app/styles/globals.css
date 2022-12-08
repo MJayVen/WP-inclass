@@ -1,0 +1,6 @@
+/* active navbar link */
+.router-link-active {
+  /* this is a class that is added to the active link */
+  background-color: #00d115;
+  border-bottom: #00aa00 5px solid;
+}
