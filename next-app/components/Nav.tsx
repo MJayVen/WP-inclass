@@ -5,6 +5,7 @@
 // import MessageList from './MessageList.vue';
 
 import Link from "next/link";
+import { useState } from "react";
 
 // const isActive = ref(false);
 // const isCartOpen = ref(false);
@@ -14,6 +15,10 @@ const LoginBadge = () => <div></div>;
 const MessageList = () => <div></div>;
 
 export default () => {
+  const [isActive, setIsActive] = useState(false);
+
+  // const isCartOpen = useState(false);
+
   return (
     <nav
       className="navbar is-primary"
@@ -32,8 +37,8 @@ export default () => {
           </a>
 
           <a
-            className="{ 'is-active': isActive } navbar-burger"
-            click="isActive = !isActive"
+            className={` navbar-burger ${isActive ? "is-active" : ""} `}
+            onClick={() => setIsActive(!isActive)}
             role="button"
             aria-label="menu"
             aria-expanded="false"
@@ -46,7 +51,7 @@ export default () => {
 
         <div
           id="navbarBasicExample"
-          className="navbar-menu { 'is-active': isActive }"
+          className={` navbar-menu ${isActive ? "is-active" : ""} `}
         >
           <div className="navbar-start">
             <Link href="/" className="navbar-item">
